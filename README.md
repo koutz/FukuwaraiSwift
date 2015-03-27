@@ -1,0 +1,2 @@
+# FukuwaraiSwift
+iPhone福笑いアプリのサンプルプロジェクトSwift版

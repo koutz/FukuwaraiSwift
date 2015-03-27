@@ -32,6 +32,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self, action: Selector("handleRotationGesture:"))
         rotationGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(rotationGestureRecognizer)
+        
+        // Synthesizerを生成しておく。
+        // ここで行わない場合、初めて顔部品を選択したときに生成されるが、音声再生までにタイムラグが発生する。
+        SpeechSynthesizer.sharedInstance.setupSynthesizer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -155,7 +159,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         for var i = 0; i < recognizer.numberOfTouches(); i++ {
             let location: CGPoint = recognizer.locationOfTouch(i, inView: self.view);
             if let view = self.view.hitTest(location, withEvent: UIEvent()) {
-                if view.isKindOfClass(PartImageView) {
+                if view is PartImageView {
                     partImageView = view as? PartImageView
                     break
                 }
@@ -170,7 +174,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         var partImageView: PartImageView? = nil
         
         if let touch = touches.anyObject() as? UITouch {
-            if touch.view.isKindOfClass(PartImageView) {
+            if touch.view is PartImageView {
                 partImageView = touch.view as? PartImageView
             }
         }

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-final class SpeechSynthesizer: NSObject {
+final class SpeechSynthesizer: NSObject, AVSpeechSynthesizerDelegate {
 
     class var sharedInstance: SpeechSynthesizer {
         struct Static {
@@ -23,6 +23,10 @@ final class SpeechSynthesizer: NSObject {
     private override init() {
     
         super.init()
+    }
+    
+    func setupSynthesizer() {
+        self.synthesizer.delegate = self
     }
     
     func stopSpeakingAtBoundary(boundary: AVSpeechBoundary) -> Bool {

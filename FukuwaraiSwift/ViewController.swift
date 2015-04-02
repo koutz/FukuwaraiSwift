@@ -87,9 +87,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 recognizer.setTranslation(CGPointZero, inView: self.view)
             }
             
-            if let movingView = self.movingView {
-                movingView.handlePanGesture(recognizer)
-            }
+            self.movingView?.handlePanGesture(recognizer)
         
         case .Ended:
             self.movingView = nil
@@ -111,9 +109,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 recognizer.rotation = 0
             }
             
-            if let movingView = self.movingView {
-                movingView.handleRotationGesture(recognizer)
-            }
+            self.movingView?.handleRotationGesture(recognizer)
         
         case .Ended:
             self.movingView = nil
@@ -138,17 +134,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private func setupMovingView(#recognizer: UIGestureRecognizer) {
     
         self.movingView = self.touchedPartImageView(recognizer: recognizer);
-        if let movingView = self.movingView {
-            movingView.setupForMoving()
-        }
+        self.movingView?.setupForMoving()
     }
     
     private func setupMovingView(#touches: NSSet) {
         
         self.movingView = self.touchedPartImageView(touches: touches)
-        if let movingView = self.movingView {
-            movingView.setupForMoving()
-        }
+        self.movingView?.setupForMoving()
     }
 
     // タッチ位置の部品ビュー取得

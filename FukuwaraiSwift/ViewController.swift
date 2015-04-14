@@ -47,14 +47,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Touches
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         
         if self.movingView == nil {
             self.setupMovingView(touches: touches)
         }
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         
         self.movingView = nil
     }
@@ -137,7 +137,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.movingView?.setupForMoving()
     }
     
-    private func setupMovingView(#touches: NSSet) {
+    private func setupMovingView(#touches: Set<NSObject>) {
         
         self.movingView = self.touchedPartImageView(touches: touches)
         self.movingView?.setupForMoving()
@@ -161,11 +161,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return partImageView
     }
     
-    private func touchedPartImageView(#touches: NSSet) -> PartImageView? {
+    private func touchedPartImageView(#touches: Set<NSObject>) -> PartImageView? {
         
         var partImageView: PartImageView? = nil
         
-        if let touch = touches.anyObject() as? UITouch {
+        if let touch = touches.first as? UITouch {
             if touch.view is PartImageView {
                 partImageView = touch.view as? PartImageView
             }
